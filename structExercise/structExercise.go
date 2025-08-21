@@ -6,58 +6,58 @@ import (
 )
 
 type Matrix struct {
-	nRows    int
-	nCols    int
-	elements [][]int
+	Nrows    int
+	Nrow     int
+	Elements [][]int
 }
 
 func newMatrix(rows, cols int) Matrix {
-	elements := make([][]int, rows)
+	Elements := make([][]int, rows)
 	for i := 0; i < rows; i++ {
-		elements[i] = make([]int, cols)
+		Elements[i] = make([]int, cols)
 	}
 	return Matrix{
-		nRows:    rows,
-		nCols:    cols,
-		elements: elements,
+		Nrows:    rows,
+		Nrow:     cols,
+		Elements: Elements,
 	}
 }
 func (m *Matrix) getRows() int {
-	return m.nRows
+	return m.Nrows
 }
 func (m *Matrix) getCols() int {
-	return m.nCols
+	return m.Nrow
 }
 func (m *Matrix) setValue(x, y int, val int) error {
-	m.elements[x][y] = val
-	if x < 0 || x >= m.nRows || y < 0 || y >= m.nCols {
+	m.Elements[x][y] = val
+	if x < 0 || x >= m.Nrows || y < 0 || y >= m.Nrow {
 		return fmt.Errorf("Index out of bounds")
 	}
-	m.elements[x][y] = val
+	m.Elements[x][y] = val
 	return nil
 }
 func (m *Matrix) addMatrices(anotherMatrices Matrix) Matrix {
-	rows := len(m.elements)
-	cols := len(m.elements[0])
+	rows := len(m.Elements)
+	cols := len(m.Elements[0])
 	result := newMatrix(rows, cols)
 	for i := 0; i < rows; i++ {
 		for j := 0; j < cols; j++ {
-			result.elements[i][j] = m.elements[i][j] + anotherMatrices.elements[i][j]
+			result.Elements[i][j] = m.Elements[i][j] + anotherMatrices.Elements[i][j]
 		}
 	}
 	return result
 }
 func (m *Matrix) printAsJSON() (string, error) {
-	jsonData, err := json.Marshal(m)
+	jsonData, err := json.Marshal(&m)
 	if err != nil {
 		return "", err
 	}
 	return string(jsonData), nil
 }
 func (m *Matrix) printMatrix() {
-	for i := 0; i < m.nRows; i++ {
-		for j := 0; j < m.nCols; j++ {
-			fmt.Print(m.elements[i][j], " ")
+	for i := 0; i < m.Nrows; i++ {
+		for j := 0; j < m.Nrow; j++ {
+			fmt.Print(m.Elements[i][j], " ")
 
 		}
 		fmt.Println()
