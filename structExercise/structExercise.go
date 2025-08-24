@@ -6,8 +6,8 @@ import (
 )
 
 type Matrix struct {
-	Nrows    int
 	Nrow     int
+	Ncol     int
 	Elements [][]int
 }
 
@@ -17,20 +17,20 @@ func newMatrix(rows, cols int) Matrix {
 		Elements[i] = make([]int, cols)
 	}
 	return Matrix{
-		Nrows:    rows,
-		Nrow:     cols,
+		Nrow:     rows,
+		Ncol:     cols,
 		Elements: Elements,
 	}
 }
 func (m *Matrix) getRows() int {
-	return m.Nrows
+	return m.Nrow
 }
 func (m *Matrix) getCols() int {
-	return m.Nrow
+	return m.Ncol
 }
 func (m *Matrix) setValue(x, y int, val int) error {
 	m.Elements[x][y] = val
-	if x < 0 || x >= m.Nrows || y < 0 || y >= m.Nrow {
+	if x < 0 || x >= m.Nrow || y < 0 || y >= m.Ncol {
 		return fmt.Errorf("Index out of bounds")
 	}
 	m.Elements[x][y] = val
@@ -55,8 +55,8 @@ func (m *Matrix) printAsJSON() (string, error) {
 	return string(jsonData), nil
 }
 func (m *Matrix) printMatrix() {
-	for i := 0; i < m.Nrows; i++ {
-		for j := 0; j < m.Nrow; j++ {
+	for i := 0; i < m.Nrow; i++ {
+		for j := 0; j < m.Ncol; j++ {
 			fmt.Print(m.Elements[i][j], " ")
 
 		}
@@ -91,12 +91,17 @@ func main() {
 	matrixB.setValue(1, 2, 4)
 	matrixB.setValue(2, 0, 3)
 	matrixB.setValue(2, 1, 2)
-	matrixB.setValue(2, 2, 1)
+	matrixB.setValue(2, 2, 5)
 
 	matrixC := matrixA.addMatrices(matrixB) // so store the addition
 	matrixC.printMatrix()
 	// as json
 	fmt.Println("As JSON")
-	str, _ := matrixC.printAsJSON()
-	fmt.Println(str)
+	str, someError := matrixC.printAsJSON()
+	if someError != nil {
+		fmt.Println("There is some error in parsing the 2D matrix into JSON Format")
+	} else {
+		fmt.Println(str)
+	}
+
 }
