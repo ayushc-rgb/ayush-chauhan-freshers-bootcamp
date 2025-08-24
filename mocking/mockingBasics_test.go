@@ -1,7 +1,6 @@
 package main
 
 import (
-	"github.com/golang/mock/gomock"
 	"testing"
 )
 
