@@ -10,7 +10,11 @@ type check struct {
 	expected int
 }
 
+<<<<<<< HEAD
 func TestCalculate(t *testing.T) { // testing.T is a struct defined in Go built in testing package
+=======
+func TestCalculate(t *testing.T) {. // testing.T is a struct defined in Go built in testing package
+>>>>>>> 536a76cb8750eb19edc7edc2a7dca41a077e0697
 	if Calculate(2) != 4 {
 		t.Error("The value should be 4")
 	}
@@ -29,6 +33,7 @@ func TestArrayCalculate(t *testing.T) {
 		{25, 27},
 		{999, 1001},
 	}
+<<<<<<< HEAD
 	for _, tt := range tabul {
 		testName := fmt.Sprintf("%d", tt.input)
 		t.Run(testName, func(t *testing.T) {
@@ -43,5 +48,11 @@ func TestArrayCalculate(t *testing.T) {
 func BenchmarkCalculate(b *testing.B) {
 	for i := 0; i < b.N; i++ {
 		Calculate(2)
+=======
+	for _, val := range tabul {
+		if output := Calculate(val.input); output != val.expected {
+			t.Error("Test failed Input:{}\nOutput:{}\nExpected:{}", val.input, output, val.expected)
+		}
+>>>>>>> 536a76cb8750eb19edc7edc2a7dca41a077e0697
 	}
 }
