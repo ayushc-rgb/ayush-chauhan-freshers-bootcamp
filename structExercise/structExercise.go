@@ -6,9 +6,9 @@ import (
 )
 
 type Matrix struct {
-	Nrow     int
-	Ncol     int
-	Elements [][]int
+	Nrow     int     `json:"noOfRows"`
+	Ncol     int     `json:"noOfCols"`
+	Elements [][]int `json:"valueOfElements"`
 }
 
 func newMatrix(rows, cols int) Matrix {
