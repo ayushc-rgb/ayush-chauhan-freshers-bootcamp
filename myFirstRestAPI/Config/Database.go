@@ -7,7 +7,7 @@ import (
 )
 
 // this is for the configuration of the database which tells us which database will be used and configured
-var DB *gorm.DB
+var DB *gorm.DB // this is the gorm variable
 
 type DBConfig struct {
 	User     string
@@ -19,11 +19,11 @@ type DBConfig struct {
 
 func BuildDBConfig() *DBConfig {
 	return &DBConfig{
-		Host:     "127.0.0.1:3306",
+		Host:     "127.0.0.1",
 		Port:     3306,
 		User:     "root",
 		Password: "ayush123",
-		DBName:   "apidb",
+		DBName:   "api_db",
 	}
 }
 
